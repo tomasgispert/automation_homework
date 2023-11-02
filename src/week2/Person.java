@@ -1,6 +1,7 @@
 package week2;
 
 import java.util.Date;
+import java.util.Objects;
 
 public abstract class Person {
     private int personId;
@@ -47,4 +48,27 @@ public abstract class Person {
         this.contactInfo = contactInfo;
     }
     public abstract void introduceMyself();
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "personId=" + personId +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", contactInfo='" + contactInfo + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return personId == person.personId && Objects.equals(name, person.name) && Objects.equals(birthday, person.birthday) && Objects.equals(contactInfo, person.contactInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(personId, name, birthday, contactInfo);
+    }
 }

@@ -1,15 +1,16 @@
 package week2;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Exercise {
     private int exerciseId;
     private String name;
     private String description;
-    private int suggestedMinReps;
-    private int getSuggestedMaxReps;
-    ArrayList<Muscle> musclesWorked;
-    ArrayList<Equipment> equipmentRequired;
+    protected int suggestedMinReps;
+    protected int getSuggestedMaxReps;
+    private ArrayList<Muscle> musclesWorked;
+    private ArrayList<Equipment> equipmentRequired;
 
     public Exercise(int exerciseId, String name, String description, int suggestedMinReps, int getSuggestedMaxReps,ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired) {
         this.exerciseId = exerciseId;
@@ -88,5 +89,18 @@ public class Exercise {
                 ", musclesWorked=" + musclesWorked +
                 ", equipmentRequired=" + equipmentRequired +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Exercise)) return false;
+        Exercise exercise = (Exercise) o;
+        return exerciseId == exercise.exerciseId && suggestedMinReps == exercise.suggestedMinReps && getSuggestedMaxReps == exercise.getSuggestedMaxReps && Objects.equals(name, exercise.name) && Objects.equals(description, exercise.description) && Objects.equals(musclesWorked, exercise.musclesWorked) && Objects.equals(equipmentRequired, exercise.equipmentRequired);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(exerciseId, name, description, suggestedMinReps, getSuggestedMaxReps, musclesWorked, equipmentRequired);
     }
 }

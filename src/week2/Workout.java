@@ -1,6 +1,7 @@
 package week2;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Workout {
     private int workoutId;
@@ -77,5 +78,18 @@ public class Workout {
                 ", instructor=" + instructor +
                 ", additionalInfo='" + additionalInfo + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Workout)) return false;
+        Workout workout = (Workout) o;
+        return workoutId == workout.workoutId && difficulty == workout.difficulty && Objects.equals(name, workout.name) && Objects.equals(exercises, workout.exercises) && Objects.equals(instructor, workout.instructor) && Objects.equals(additionalInfo, workout.additionalInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(workoutId, name, exercises, difficulty, instructor, additionalInfo);
     }
 }

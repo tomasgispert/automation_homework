@@ -6,7 +6,7 @@ public class Equipment {
     private String brand;
     private String type;
     private double weight;
-    private String color;
+    protected String color;
 
     public Equipment(int equipmentId, String name, String brand, String type, double weight, String color) {
         this.equipmentId = equipmentId;

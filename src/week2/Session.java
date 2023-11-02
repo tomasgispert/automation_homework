@@ -7,8 +7,8 @@ public class Session {
     private Date date;
     private Member member;
     private Workout workout;
-    private boolean isCompleted;
-    private int sessionRPE; //rate of perceived exertion (1-10)
+    protected boolean isCompleted;
+    protected int sessionRPE; //rate of perceived exertion (1-10)
 
     public Session(int sessionId, Date date, Member member, Workout workout, boolean isCompleted, int sessionRPE) {
         this.sessionId = sessionId;
