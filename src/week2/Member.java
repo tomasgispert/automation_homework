@@ -38,4 +38,11 @@ public class Member extends Person{
                 ", membership=" + membership +
                 '}';
     }
+
+    @Override
+    public void introduceMyself() {
+        System.out.println("Hello, my name is "
+                +this.getName()+" and my goal training here is "
+                +this.getFitnessGoals());
+    }
 }

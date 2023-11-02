@@ -50,4 +50,11 @@ public class Instructor extends Person {
                 ", topThreeExercises=" + topThreeExercises +
                 '}';
     }
+
+    @Override
+    public void introduceMyself() {
+        System.out.println("Hi, my name is "+this.getName()
+                +" and I'm an Instructor and this are my favourite exercise is the "
+                +this.getTopThreeExercises().get(0).getName());
+    }
 }

@@ -46,4 +46,5 @@ public abstract class Person {
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
     }
+    public abstract void introduceMyself();
 }

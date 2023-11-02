@@ -18,9 +18,9 @@ public class GymApp {
         ArrayList<Exercise> powerlifting101 = new ArrayList<>();
         powerlifting101.add(squat);
 
-        Instructor instructor = new Instructor(1,"john",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);
+        Instructor instructor = new Instructor(1,"John",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);
         Membership standardMembership = new Membership(1,"Standard",100,4,true,"Cash only");
-        Member member = new Member(1,"mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
+        Member member = new Member(1,"Mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
         Payment mikeOctober = new Payment(1,new Date(1673462400000L),100,member,"cash","successful");
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
         Session mikePowerSession = new Session(1,new Date(1673462400000L),member,powerliftingWorkout,true,8);
@@ -31,6 +31,8 @@ public class GymApp {
 
         //printClasses(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
         printSummary(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
+        instructor.introduceMyself();
+        member.introduceMyself();
     }
 
     /*
@@ -49,14 +51,14 @@ public class GymApp {
 
     public static void printSummary(Equipment eq,Exercise ex,Instructor in,Member me,Membership ms,Muscle mu,Payment pa,Seminar se,Session ss,Workout wo){
         System.out.println(
-                "In summary: "+me.getName().substring(0,1).toUpperCase()+me.getName().substring(1)
-                        +" paid his "+ms.getType()+" Membership on "+pa.getDate()
-                        +" and completed "+wo.getName()+" from instructor "
-                        +in.getName().substring(0,1).toUpperCase()+in.getName().substring(1)
-                        +" on the "+ss.getDate()+". He did "+ex.getName()+"s with the "+eq.getName()
-                        +" which primarily work the "+mu.getName()
-                        +", and his perceived effort for the session was "+ss.getSessionRPE()
-                        +". He will be attending the "+se.getName()
-                        +" seminar on the"+se.getDate());
+                "In summary: "+me.getName()+" paid his "+ms.getType()
+                +" Membership on "+pa.getDate()
+                +" and completed "+wo.getName()+" from instructor "
+                +in.getName()+" on the "+ss.getDate()
+                +". He did "+ex.getName()+"s with the "+eq.getName()
+                +" which primarily work the "+mu.getName()
+                +", and his perceived effort for the session was "+ss.getSessionRPE()
+                +". He will be attending the "+se.getName()
+                +" seminar on the"+se.getDate());
     }
 }
