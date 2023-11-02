@@ -1,7 +1,6 @@
 package week2;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class Member extends Person{
     private String fitnessGoals;

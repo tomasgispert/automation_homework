@@ -25,9 +25,9 @@ public class GymApp {
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
         Session mikePowerSession = new Session(1,new Date(1673462400000L),member,powerliftingWorkout,true,8);
 
-        ArrayList<Member> powerliftingSeminarMembers = new ArrayList<>();
-        powerliftingSeminarMembers.add(member);
-        Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarMembers,"Introductory class to powerlifting");
+        ArrayList<Person> powerliftingSeminarAttendees = new ArrayList<>();
+        powerliftingSeminarAttendees.add(member);
+        Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting");
 
         //printClasses(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
         printSummary(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);

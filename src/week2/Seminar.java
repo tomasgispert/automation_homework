@@ -9,16 +9,16 @@ public class Seminar {
     private Date date;
     private double estimatedDuration;
     private Instructor instructor;
-    private ArrayList<Member> members;
+    private ArrayList<Person> attendees;
     private String description;
 
-    public Seminar(int seminarId, String name, Date date, double estimatedDuration, Instructor instructor, ArrayList<Member> members, String description) {
+    public Seminar(int seminarId, String name, Date date, double estimatedDuration, Instructor instructor, ArrayList<Person> attendees, String description) {
         this.seminarId = seminarId;
         this.name = name;
         this.date = date;
         this.estimatedDuration = estimatedDuration;
         this.instructor = instructor;
-        this.members = members;
+        this.attendees = attendees;
         this.description = description;
     }
 
@@ -62,12 +62,12 @@ public class Seminar {
         this.instructor = instructor;
     }
 
-    public ArrayList<Member> getMembers() {
-        return members;
+    public ArrayList<Person> getAttendees() {
+        return attendees;
     }
 
-    public void setMembers(ArrayList<Member> members) {
-        this.members = members;
+    public void setMembers(ArrayList<Person> attendees) {
+        this.attendees = attendees;
     }
 
     public String getDescription() {
@@ -86,7 +86,7 @@ public class Seminar {
                 ", date=" + date +
                 ", estimatedDuration=" + estimatedDuration +
                 ", instructor=" + instructor +
-                ", members=" + members +
+                ", members=" + attendees +
                 ", description='" + description + '\'' +
                 '}';
     }
