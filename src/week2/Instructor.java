@@ -1,38 +1,18 @@
 package week2;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Instructor {
-    private int instructorId;
-    private String name;
+public class Instructor extends Person {
     private String expertise;
     private boolean isCertified;
-    private String contactInfo;
     private ArrayList<Exercise> topThreeExercises;
 
-    public Instructor(int instructorId, String name, String expertise, boolean isCertified, String contactInfo, ArrayList<Exercise> topThreeExercises) {
-        this.instructorId = instructorId;
-        this.name = name;
+    public Instructor(int instructorId, String name, Date birthday, String contactInfo, String expertise, boolean isCertified, ArrayList<Exercise> topThreeExercises) {
+        super(instructorId,name,birthday,contactInfo);
         this.expertise = expertise;
         this.isCertified = isCertified;
-        this.contactInfo = contactInfo;
         this.topThreeExercises = topThreeExercises;
-    }
-
-    public int getInstructorId() {
-        return instructorId;
-    }
-
-    public void setInstructorId(int instructorId) {
-        this.instructorId = instructorId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getExpertise() {
@@ -51,14 +31,6 @@ public class Instructor {
         isCertified = certified;
     }
 
-    public String getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
     public ArrayList<Exercise> getTopThreeExercises() {
         return topThreeExercises;
     }
@@ -70,11 +42,11 @@ public class Instructor {
     @Override
     public String toString() {
         return "Instructor{" +
-                "instructorId=" + instructorId +
-                ", name='" + name + '\'' +
+                "instructorId=" + this.getPersonId() +
+                ", name='" + this.getName() + '\'' +
                 ", expertise='" + expertise + '\'' +
                 ", isCertified=" + isCertified +
-                ", contactInfo='" + contactInfo + '\'' +
+                ", contactInfo='" + this.getContactInfo() + '\'' +
                 ", topThreeExercises=" + topThreeExercises +
                 '}';
     }

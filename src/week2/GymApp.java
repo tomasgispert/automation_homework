@@ -18,9 +18,9 @@ public class GymApp {
         ArrayList<Exercise> powerlifting101 = new ArrayList<>();
         powerlifting101.add(squat);
 
-        Instructor instructor = new Instructor(1,"john","powerlifting",false,"john@gmail.com",powerlifting101);
+        Instructor instructor = new Instructor(1,"john",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);
         Membership standardMembership = new Membership(1,"Standard",100,4,true,"Cash only");
-        Member member = new Member(1,"mike",new Date(1673462400000L),"General Health","mike@gmail.com",standardMembership);
+        Member member = new Member(1,"mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
         Payment mikeOctober = new Payment(1,new Date(1673462400000L),100,member,"cash","successful");
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
         Session mikePowerSession = new Session(1,new Date(1673462400000L),member,powerliftingWorkout,true,8);
