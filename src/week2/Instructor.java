@@ -57,4 +57,9 @@ public class Instructor extends Person {
                 +" and I'm an Instructor and this are my favourite exercise is the "
                 +this.getTopThreeExercises().get(0).getName());
     }
+
+    @Override
+    public Payment makePayment(double amount, String paymentMethod) {
+        return new Payment(new Date(),0,this,"instructor");
+    }
 }

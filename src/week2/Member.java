@@ -45,4 +45,9 @@ public class Member extends Person{
                 +this.getName()+" and my goal training here is "
                 +this.getFitnessGoals());
     }
+
+    @Override
+    public Payment makePayment(double amount, String paymentMethod) {
+        return new Payment(new Date(),amount,this,paymentMethod);
+    }
 }

@@ -3,28 +3,16 @@ package week2;
 import java.util.Date;
 
 public class Payment {
-    private int paymentId;
     private Date date;
     private double amount;
-    private Member member;
+    private Person payer;
     private String paymentMethod;
-    private String paymentStatus;
 
-    public Payment(int paymentId, Date date, double amount, Member member, String paymentMethod, String paymentStatus) {
-        this.paymentId = paymentId;
+    public Payment(Date date, double amount, Person payer, String paymentMethod) {
         this.date = date;
         this.amount = amount;
-        this.member = member;
+        this.payer = payer;
         this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-    }
-
-    public int getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
     }
 
     public Date getDate() {
@@ -43,12 +31,12 @@ public class Payment {
         this.amount = amount;
     }
 
-    public Member getMember() {
-        return member;
+    public Person getPayer() {
+        return payer;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setPayer(Person payer) {
+        this.payer = payer;
     }
 
     public String getPaymentMethod() {
@@ -59,23 +47,13 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
     @Override
     public String toString() {
         return "Payment{" +
-                "paymentId=" + paymentId +
                 ", date=" + date +
                 ", amount=" + amount +
-                ", member=" + member +
+                ", member=" + payer +
                 ", paymentMethod='" + paymentMethod + '\'' +
-                ", paymentStatus='" + paymentStatus + '\'' +
                 '}';
     }
 }

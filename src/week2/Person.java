@@ -3,7 +3,7 @@ package week2;
 import java.util.Date;
 import java.util.Objects;
 
-public abstract class Person {
+public abstract class Person implements IPay{
     private int personId;
     private String name;
     private Date birthday;

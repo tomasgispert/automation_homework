@@ -19,9 +19,9 @@ public class GymApp {
         powerlifting101.add(squat);
 
         Instructor instructor = new Instructor(1,"John",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);
-        Membership standardMembership = new Membership(1,"Standard",100,4,true,"Cash only");
+        Membership standardMembership = new Membership("Standard",100,10,true,"Cash only");
         Member member = new Member(1,"Mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
-        Payment mikeOctober = new Payment(1,new Date(1673462400000L),100,member,"cash","successful");
+        Payment mikeOctober = new Payment(new Date(1673462400000L),100,member,"cash");
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
         Session mikePowerSession = new Session(1,new Date(1673462400000L),member,powerliftingWorkout,true,8);
 
@@ -29,25 +29,10 @@ public class GymApp {
         powerliftingSeminarAttendees.add(member);
         Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting");
 
-        //printClasses(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
         printSummary(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
         instructor.introduceMyself();
         member.introduceMyself();
     }
-
-    /*
-    public static void printClasses(Equipment eq,Exercise ex,Instructor in,Member me,Membership ms,Muscle mu,Payment pa,Seminar se,Session ss,Workout wo){
-        System.out.println(eq.toString());
-        System.out.println(ex.toString());
-        System.out.println(in.toString());
-        System.out.println(me.toString());
-        System.out.println(ms.toString());
-        System.out.println(mu.toString());
-        System.out.println(pa.toString());
-        System.out.println(se.toString());
-        System.out.println(ss.toString());
-        System.out.println(wo.toString());
-    } **/
 
     public static void printSummary(Equipment eq,Exercise ex,Instructor in,Member me,Membership ms,Muscle mu,Payment pa,Seminar se,Session ss,Workout wo){
         System.out.println(
