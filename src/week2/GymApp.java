@@ -34,7 +34,7 @@ public class GymApp {
         member.introduceMyself();
     }
 
-    public static void printSummary(Equipment eq,Exercise ex,Instructor in,Member me,Membership ms,Muscle mu,Payment pa,Seminar se,Session ss,Workout wo){
+    public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
         System.out.println(
                 "In summary: "+me.getName()+" paid his "+ms.getType()
                 +" Membership on "+pa.getDate()

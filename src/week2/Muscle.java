@@ -1,8 +1,8 @@
 package week2;
 
-public class Muscle {
+public final class Muscle {
     private int muscleId;
-    private String name;
+    private final String name;
     private String description;
     private String primaryFunction;
     private boolean isMajorMuscle;
@@ -25,10 +25,6 @@ public class Muscle {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {

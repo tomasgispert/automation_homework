@@ -8,6 +8,8 @@ public abstract class Person implements IPay{
     private String name;
     private Date birthday;
     private String contactInfo;
+    private double weight;
+    private int height;
 
     public Person(int personId, String name, Date birthday, String contactInfo) {
         this.personId = personId;
@@ -47,7 +49,28 @@ public abstract class Person implements IPay{
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
     }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public abstract void introduceMyself();
+
+    public final double calculateBMI() {
+        return this.weight / (this.height * this.height);
+    }
 
     @Override
     public String toString() {
