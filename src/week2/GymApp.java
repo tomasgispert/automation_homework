@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GymApp {
+    private static int gymAppVersion;
+
+    static {
+        gymAppVersion = 2;
+    }
+    public static int getGymAppVersion() {
+        return gymAppVersion;
+    }
     public static void main(String[] args){
         Equipment squatBar = new Equipment(1,"Squat Bar","Generic","Bar",25,"Steel");
         Muscle quadriceps = new Muscle(1,"Quadriceps","Group of four muscles in the front of the thigh responsible for knee extension and lower limb stability","Knee extension",true);
