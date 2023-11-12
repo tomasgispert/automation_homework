@@ -1,30 +1,19 @@
 package week2;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-public class Session {
-    private int sessionId;
+public class Session implements IVolume {
     private Date date;
     private Member member;
     private Workout workout;
-    protected boolean isCompleted;
     protected int sessionRPE; //rate of perceived exertion (1-10)
 
-    public Session(int sessionId, Date date, Member member, Workout workout, boolean isCompleted, int sessionRPE) {
-        this.sessionId = sessionId;
+    public Session(Date date, Member member, Workout workout, int sessionRPE) {
         this.date = date;
         this.member = member;
         this.workout = workout;
-        this.isCompleted = isCompleted;
         this.sessionRPE = sessionRPE;
-    }
-
-    public int getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
     }
 
     public Date getDate() {
@@ -51,14 +40,6 @@ public class Session {
         this.workout = workout;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
-    }
-
     public int getSessionRPE() {
         return sessionRPE;
     }
@@ -70,12 +51,23 @@ public class Session {
     @Override
     public String toString() {
         return "Session{" +
-                "sessionId=" + sessionId +
-                ", date=" + date +
+                "date=" + date +
                 ", member=" + member +
                 ", workout=" + workout +
-                ", isCompleted=" + isCompleted +
                 ", sessionRPE=" + sessionRPE +
                 '}';
+    }
+
+    @Override
+    public double getVolume() {
+        double volume = 0;
+        ArrayList<Exercise> sets = this.getWorkout().getExercises();
+        for (int i = 0; i < sets.size()-1; i++) {
+            if(sets.get(i) instanceof Set) {
+                Set set = (Set) sets.get(i);
+                volume = set.getVolume() + volume;
+            }
+        }
+        return volume;
     }
 }

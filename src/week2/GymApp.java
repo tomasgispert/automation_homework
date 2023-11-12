@@ -21,7 +21,7 @@ public class GymApp {
         ArrayList<Equipment> squatEquipment = new ArrayList<>();
         squatEquipment.add(squatBar);
 
-        Exercise squat = new Exercise(1,"Squat","Strength exercise in which the trainee lowers their hips from a standing position and then stands back up",1,10,squatMuscles,squatEquipment);
+        Exercise squat = new Exercise("Squat","Strength exercise in which the trainee lowers their hips from a standing position and then stands back up",squatMuscles,squatEquipment);
 
         ArrayList<Exercise> powerlifting101 = new ArrayList<>();
         powerlifting101.add(squat);
@@ -31,7 +31,7 @@ public class GymApp {
         Member member = new Member(1,"Mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
         Payment mikeOctober = new Payment(new Date(1673462400000L),100,member,"cash");
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
-        Session mikePowerSession = new Session(1,new Date(1673462400000L),member,powerliftingWorkout,true,8);
+        Session mikePowerSession = new Session(new Date(1673462400000L),member,powerliftingWorkout,8);
 
         ArrayList<Person> powerliftingSeminarAttendees = new ArrayList<>();
         powerliftingSeminarAttendees.add(member);
