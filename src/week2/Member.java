@@ -2,7 +2,7 @@ package week2;
 
 import java.util.Date;
 
-public class Member extends Person{
+public class Member extends Person implements IWorkout{
     private String fitnessGoals;
     private Membership membership;
 
@@ -49,5 +49,10 @@ public class Member extends Person{
     @Override
     public Payment makePayment(double amount, String paymentMethod) {
         return new Payment(new Date(),amount,this,paymentMethod);
+    }
+
+    @Override
+    public Session completeSession(Workout workout, int rpe) {
+        return new Session(new Date(),this,workout,rpe);
     }
 }
