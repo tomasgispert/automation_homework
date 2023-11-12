@@ -3,7 +3,7 @@ package week2;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Seminar {
+public class Seminar implements Certifiable{
     private int seminarId;
     private String name;
     private Date date;
@@ -89,5 +89,10 @@ public class Seminar {
                 ", members=" + attendees +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean isCertified() {
+        return this.getInstructor().isCertified();
     }
 }

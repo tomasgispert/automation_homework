@@ -3,7 +3,7 @@ package week2;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Instructor extends Person {
+public class Instructor extends Person implements Certifiable{
     private String expertise;
     private boolean isCertified;
     private ArrayList<Exercise> topThreeExercises;
