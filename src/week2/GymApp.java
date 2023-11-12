@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class GymApp {
-    private static int gymAppVersion;
+    private static final int gymAppVersion;
 
     static {
         gymAppVersion = 2;
@@ -35,7 +35,7 @@ public class GymApp {
 
         ArrayList<Person> powerliftingSeminarAttendees = new ArrayList<>();
         powerliftingSeminarAttendees.add(member);
-        Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting");
+        Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting",100);
 
         printSummary(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
         instructor.introduceMyself();

@@ -1,6 +1,6 @@
 package week2;
 
-public class Membership {
+public class Membership implements Payable {
     private String type;
     private double fee;
     private int feeDuration;
@@ -64,5 +64,10 @@ public class Membership {
                 ", isAutoRenewal=" + isAutoRenewal +
                 ", conditions='" + conditions + '\'' +
                 '}';
+    }
+
+    @Override
+    public double getCost() {
+        return this.getFee();
     }
 }

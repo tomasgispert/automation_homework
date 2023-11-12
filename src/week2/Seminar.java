@@ -3,7 +3,7 @@ package week2;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Seminar implements Certifiable{
+public class Seminar implements Certifiable,Payable{
     private int seminarId;
     private String name;
     private Date date;
@@ -11,8 +11,9 @@ public class Seminar implements Certifiable{
     private Instructor instructor;
     private ArrayList<Person> attendees;
     private String description;
+    private double price;
 
-    public Seminar(int seminarId, String name, Date date, double estimatedDuration, Instructor instructor, ArrayList<Person> attendees, String description) {
+    public Seminar(int seminarId, String name, Date date, double estimatedDuration, Instructor instructor, ArrayList<Person> attendees, String description, double price) {
         this.seminarId = seminarId;
         this.name = name;
         this.date = date;
@@ -20,6 +21,7 @@ public class Seminar implements Certifiable{
         this.instructor = instructor;
         this.attendees = attendees;
         this.description = description;
+        this.price = price;
     }
 
     public int getSeminarId() {
@@ -62,6 +64,10 @@ public class Seminar implements Certifiable{
         this.instructor = instructor;
     }
 
+    public void setAttendees(ArrayList<Person> attendees) {
+        this.attendees = attendees;
+    }
+
     public ArrayList<Person> getAttendees() {
         return attendees;
     }
@@ -78,6 +84,14 @@ public class Seminar implements Certifiable{
         this.description = description;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Seminar{" +
@@ -87,12 +101,18 @@ public class Seminar implements Certifiable{
                 ", estimatedDuration=" + estimatedDuration +
                 ", instructor=" + instructor +
                 ", members=" + attendees +
-                ", description='" + description + '\'' +
+                ", description='" + description +
+                ", price='" + price + '\'' +
                 '}';
     }
 
     @Override
     public boolean isCertified() {
         return this.getInstructor().isCertified();
+    }
+
+    @Override
+    public double getCost() {
+        return this.getPrice();
     }
 }
