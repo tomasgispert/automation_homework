@@ -2,13 +2,18 @@ package week2;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class GymApp {
     private static final int gymAppVersion;
 
     static {
         gymAppVersion = 2;
+        System.setProperty("log4j.configurationFile","log4j2.xml");
     }
+
+    private static final Logger LOGGER = Logger.getLogger("GymApp.class");
+
     public static int getGymAppVersion() {
         return gymAppVersion;
     }
@@ -40,6 +45,8 @@ public class GymApp {
         printSummary(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
         instructor.introduceMyself();
         member.introduceMyself();
+
+        LOGGER.info(squatBar.toString());
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
