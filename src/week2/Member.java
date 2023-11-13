@@ -52,7 +52,13 @@ public class Member extends Person implements IWorkout{
     }
 
     @Override
-    public Session completeSession(Workout workout, int rpe) {
-        return new Session(new Date(),this,workout,rpe);
+    public Session completeSession(Workout workout, int rpe) throws InvalidIntensityException {
+        if(rpe > 0 && rpe <= 10){
+            Session completedSession = new Session(new Date(),this,workout);
+            completedSession.setSessionRPE(rpe);
+            return completedSession;
+        }else{
+            throw new InvalidIntensityException("Rate of perceived exertion is invalid");
+        }
     }
 }

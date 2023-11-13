@@ -9,11 +9,10 @@ public class Session implements IVolume {
     private Workout workout;
     protected int sessionRPE; //rate of perceived exertion (1-10)
 
-    public Session(Date date, Member member, Workout workout, int sessionRPE) {
+    public Session(Date date, Member member, Workout workout) {
         this.date = date;
         this.member = member;
         this.workout = workout;
-        this.sessionRPE = sessionRPE;
     }
 
     public Date getDate() {

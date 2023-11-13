@@ -36,17 +36,19 @@ public class GymApp {
         Member member = new Member(1,"Mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
         Payment mikeOctober = new Payment(new Date(1673462400000L),100,member,"cash");
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
-        Session mikePowerSession = new Session(new Date(1673462400000L),member,powerliftingWorkout,8);
+        Session mikePowerSession = new Session(new Date(1673462400000L),member,powerliftingWorkout);
 
         ArrayList<Person> powerliftingSeminarAttendees = new ArrayList<>();
         powerliftingSeminarAttendees.add(member);
         Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting",100);
 
-        printSummary(squatBar,squat,instructor,member,standardMembership,quadriceps,mikeOctober,powerliftingSeminar,mikePowerSession,powerliftingWorkout);
-        instructor.introduceMyself();
-        member.introduceMyself();
 
-        LOGGER.info(squatBar.toString());
+        try{
+            mikePowerSession = member.completeSession(powerliftingWorkout,11);
+        } catch (InvalidIntensityException e) {
+            LOGGER.info(e.toString());
+        }
+
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
