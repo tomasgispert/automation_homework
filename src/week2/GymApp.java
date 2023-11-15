@@ -49,6 +49,12 @@ public class GymApp {
             LOGGER.info(e.toString());
         }
 
+        try{
+            member.makePayment(90,"cash");
+        } catch (InsufficientMoneyException e){
+            LOGGER.info(e.toString());
+        }
+
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){

@@ -7,6 +7,7 @@ public class Equipment {
     private String type;
     private double weight;
     protected String color;
+    private boolean isAvailable;
 
     public Equipment(int equipmentId, String name, String brand, String type, double weight, String color) {
         this.equipmentId = equipmentId;
@@ -63,6 +64,14 @@ public class Equipment {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     @Override

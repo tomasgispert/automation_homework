@@ -62,4 +62,19 @@ public class Instructor extends Person implements Certifiable{
     public Payment makePayment(double amount, String paymentMethod) {
         return new Payment(new Date(),0,this,"instructor");
     }
+
+    public Exercise createExercise(String name, String description, ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired) throws MissingEquipmentException {
+        boolean isAvailable = true;
+        for (int i = 0; i < equipmentRequired.size()-1; i++) {
+            isAvailable = equipmentRequired.get(i).isAvailable();
+            if(!isAvailable){
+                break;
+            }
+        }
+        if(isAvailable){
+            return new Exercise(name,description,musclesWorked,equipmentRequired);
+        }else{
+            throw new MissingEquipmentException("The equipment requirements cannot be met at the moment");
+        }
+    }
 }

@@ -1,5 +1,5 @@
 package week2;
 
 public interface IPay {
-    Payment makePayment(double amount,String paymentMethod);
+    Payment makePayment(double amount,String paymentMethod) throws InsufficientMoneyException;
 }
