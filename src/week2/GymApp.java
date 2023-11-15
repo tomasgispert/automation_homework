@@ -1,22 +1,22 @@
 package week2;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class GymApp {
     private static final int gymAppVersion;
+    private static final Logger LOGGER;
 
     static {
         gymAppVersion = 2;
         System.setProperty("log4j.configurationFile","log4j2.xml");
+        LOGGER = Logger.getLogger("GymApp.class");
     }
 
-    private static final Logger LOGGER = Logger.getLogger("GymApp.class");
-
-    public static int getGymAppVersion() {
-        return gymAppVersion;
-    }
     public static void main(String[] args){
         Equipment squatBar = new Equipment(1,"Squat Bar","Generic","Bar",25,"Steel");
         Muscle quadriceps = new Muscle(1,"Quadriceps","Group of four muscles in the front of the thigh responsible for knee extension and lower limb stability","Knee extension",true);
@@ -46,15 +46,16 @@ public class GymApp {
         try{
             mikePowerSession = member.completeSession(powerliftingWorkout,11);
         } catch (InvalidIntensityException e) {
-            LOGGER.info(e.toString());
+            logExceptionToFile(e);
         }
 
-        try{
-            member.makePayment(90,"cash");
+        try (FileWriter fw = new FileWriter("src/week2/logs/payments.log",true)){
+            fw.write(member.makePayment(90,"cash").toString()+System.getProperty("line.separator"));
         } catch (InsufficientMoneyException e){
-            LOGGER.info(e.toString());
+            logExceptionToFile(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
@@ -69,4 +70,25 @@ public class GymApp {
                 +". He will be attending the "+se.getName()
                 +" seminar on the"+se.getDate());
     }
+
+    public static int getGymAppVersion() {
+        return gymAppVersion;
+    }
+
+    public static void logExceptionToFile(Exception exception) {
+        Logger logger = Logger.getLogger("ExceptionLogger");
+
+        try (CustomFileHandler fileHandler = new CustomFileHandler("src/week2/logs/exceptions.log", true)) {
+            logger.addHandler(fileHandler.getFileHandler());
+
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+            logger.severe("Exception occurred: " + exception.getMessage());
+        }
+        catch (IOException e) {
+            LOGGER.info(e.toString());
+        }
+    }
+
+
 }
