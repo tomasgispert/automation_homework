@@ -1,6 +1,6 @@
 package week2;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 public class Seminar implements Certifiable,Payable{
@@ -9,11 +9,11 @@ public class Seminar implements Certifiable,Payable{
     private Date date;
     private double estimatedDuration;
     private Instructor instructor;
-    private ArrayList<Person> attendees;
+    private List<Person> attendees;
     private String description;
     private double price;
 
-    public Seminar(int seminarId, String name, Date date, double estimatedDuration, Instructor instructor, ArrayList<Person> attendees, String description, double price) {
+    public Seminar(int seminarId, String name, Date date, double estimatedDuration, Instructor instructor, List<Person> attendees, String description, double price) {
         this.seminarId = seminarId;
         this.name = name;
         this.date = date;
@@ -64,15 +64,15 @@ public class Seminar implements Certifiable,Payable{
         this.instructor = instructor;
     }
 
-    public void setAttendees(ArrayList<Person> attendees) {
+    public void setAttendees(List<Person> attendees) {
         this.attendees = attendees;
     }
 
-    public ArrayList<Person> getAttendees() {
+    public List<Person> getAttendees() {
         return attendees;
     }
 
-    public void setMembers(ArrayList<Person> attendees) {
+    public void setMembers(List<Person> attendees) {
         this.attendees = attendees;
     }
 

@@ -1,14 +1,14 @@
 package week2;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 public class Instructor extends Person implements Certifiable{
     private String expertise;
     private boolean isCertified;
-    private ArrayList<Exercise> topThreeExercises;
+    private List<Exercise> topThreeExercises;
 
-    public Instructor(int instructorId, String name, Date birthday, String contactInfo, String expertise, boolean isCertified, ArrayList<Exercise> topThreeExercises) {
+    public Instructor(int instructorId, String name, Date birthday, String contactInfo, String expertise, boolean isCertified, List<Exercise> topThreeExercises) {
         super(instructorId,name,birthday,contactInfo);
         this.expertise = expertise;
         this.isCertified = isCertified;
@@ -31,11 +31,11 @@ public class Instructor extends Person implements Certifiable{
         isCertified = certified;
     }
 
-    public ArrayList<Exercise> getTopThreeExercises() {
+    public List<Exercise> getTopThreeExercises() {
         return topThreeExercises;
     }
 
-    public void setTopThreeExercises(ArrayList<Exercise> topThreeExercises) {
+    public void setTopThreeExercises(List<Exercise> topThreeExercises) {
         this.topThreeExercises = topThreeExercises;
     }
 
@@ -63,7 +63,7 @@ public class Instructor extends Person implements Certifiable{
         return new Payment(new Date(),0,this,"instructor");
     }
 
-    public Exercise createExercise(String name, String description, ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired) throws MissingEquipmentException {
+    public Exercise createExercise(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired) throws MissingEquipmentException {
         boolean isAvailable = true;
         for (int i = 0; i < equipmentRequired.size()-1; i++) {
             isAvailable = equipmentRequired.get(i).isAvailable();

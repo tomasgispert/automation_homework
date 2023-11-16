@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -28,7 +29,7 @@ public class GymApp {
 
         Exercise squat = new Exercise("Squat","Strength exercise in which the trainee lowers their hips from a standing position and then stands back up",squatMuscles,squatEquipment);
 
-        ArrayList<Exercise> powerlifting101 = new ArrayList<>();
+        List<Exercise> powerlifting101 = new ArrayList<>();
         powerlifting101.add(squat);
 
         Instructor instructor = new Instructor(1,"John",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);

@@ -1,15 +1,15 @@
 package week2;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Exercise{
     private String name;
     private String description;
-    private ArrayList<Muscle> musclesWorked;
-    private ArrayList<Equipment> equipmentRequired;
+    private List<Muscle> musclesWorked;
+    private List<Equipment> equipmentRequired;
 
-    public Exercise(String name, String description, ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired) {
+    public Exercise(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired) {
         this.name = name;
         this.description = description;
         this.musclesWorked = musclesWorked;
@@ -32,19 +32,19 @@ public class Exercise{
         this.description = description;
     }
 
-    public ArrayList<Muscle> getMusclesWorked() {
+    public List<Muscle> getMusclesWorked() {
         return musclesWorked;
     }
 
-    public void setMusclesWorked(ArrayList<Muscle> musclesWorked) {
+    public void setMusclesWorked(List<Muscle> musclesWorked) {
         this.musclesWorked = musclesWorked;
     }
 
-    public ArrayList<Equipment> getEquipmentRequired() {
+    public List<Equipment> getEquipmentRequired() {
         return equipmentRequired;
     }
 
-    public void setEquipmentRequired(ArrayList<Equipment> equipmentRequired) {
+    public void setEquipmentRequired(List<Equipment> equipmentRequired) {
         this.equipmentRequired = equipmentRequired;
     }
 

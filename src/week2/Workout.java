@@ -1,17 +1,17 @@
 package week2;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Workout {
     private int workoutId;
     private String name;
-    ArrayList<Exercise> exercises;
+    List<Exercise> exercises;
     private int difficulty;
     Instructor instructor;
     private String additionalInfo;
 
-    public Workout(int workoutId, String name, ArrayList<Exercise> exercises, int difficulty, Instructor instructor, String additionalInfo) {
+    public Workout(int workoutId, String name, List<Exercise> exercises, int difficulty, Instructor instructor, String additionalInfo) {
         this.workoutId = workoutId;
         this.name = name;
         this.exercises = exercises;
@@ -36,11 +36,11 @@ public class Workout {
         this.name = name;
     }
 
-    public ArrayList<Exercise> getExercises() {
+    public List<Exercise> getExercises() {
         return exercises;
     }
 
-    public void setExercises(ArrayList<Exercise> exercises) {
+    public void setExercises(List<Exercise> exercises) {
         this.exercises = exercises;
     }
 

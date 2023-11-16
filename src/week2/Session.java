@@ -1,7 +1,7 @@
 package week2;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Session implements IVolume {
     private Date date;
@@ -60,7 +60,7 @@ public class Session implements IVolume {
     @Override
     public double getVolume() {
         double volume = 0;
-        ArrayList<Exercise> sets = this.getWorkout().getExercises();
+        List<Exercise> sets = this.getWorkout().getExercises();
         for (int i = 0; i < sets.size()-1; i++) {
             if(sets.get(i) instanceof Set) {
                 Set set = (Set) sets.get(i);
