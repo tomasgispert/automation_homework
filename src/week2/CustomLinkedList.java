@@ -27,11 +27,11 @@ public class CustomLinkedList<T> {
         if(this.isEmpty()){
             this.first = newNode;
         }else{
-            CustomLinkedListNode<T> tempNode = this.first;
-            while(tempNode.next != null){
-                tempNode = tempNode.next;
+            CustomLinkedListNode<T> auxNode = this.first;
+            while(auxNode.next != null){
+                auxNode = auxNode.next;
             }
-            tempNode.next = newNode;
+            auxNode.next = newNode;
         }
         this.size++;
     }
@@ -42,6 +42,23 @@ public class CustomLinkedList<T> {
 
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    public void addFirst(T data){
+        CustomLinkedListNode<T> newNode = new CustomLinkedListNode<>(data);
+        if(this.isEmpty()){
+            this.first = newNode;
+        }else{
+            CustomLinkedListNode<T> auxNode = this.first;
+            this.first = newNode;
+            newNode.next = auxNode;
+        }
+        this.size++;
+    }
+
+
+    public void addLast(T data){
+        this.add(data);
     }
 
     @Override
