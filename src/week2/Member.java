@@ -50,8 +50,7 @@ public class Member extends Person implements IWorkout{
     public Payment makePayment(double amount, String paymentMethod) throws InsufficientMoneyException {
         if(amount >= this.getMembership().getCost()){
             return new Payment(new Date(),amount,this,paymentMethod);
-        }
-        else{
+        }else{
             throw new InsufficientMoneyException("The amount is not enough to cover the Membership");
         }
 

@@ -21,6 +21,7 @@ public class GymApp {
     public static void main(String[] args){
         Equipment squatBar = new Equipment(1,"Squat Bar","Generic","Bar",25,"Steel");
         Muscle quadriceps = new Muscle(1,"Quadriceps","Group of four muscles in the front of the thigh responsible for knee extension and lower limb stability","Knee extension",true);
+        Muscle hamstrings = new Muscle(1,"Hamstrings","Group of four muscles in the back of the thigh responsible for knee flexion and lower limb stability","Knee flexion",true);
 
         ArrayList<Muscle> squatMuscles = new ArrayList<>();
         squatMuscles.add(quadriceps);
@@ -44,7 +45,7 @@ public class GymApp {
         Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting",100);
 
 
-        try{
+        /*try{
             mikePowerSession = member.completeSession(powerliftingWorkout,11);
         } catch (InvalidIntensityException e) {
             logExceptionToFile(e);
@@ -56,7 +57,12 @@ public class GymApp {
             logExceptionToFile(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }**/
+
+        CustomLinkedList<Muscle> cll = new CustomLinkedList<>();
+        cll.add(quadriceps);
+        cll.add(hamstrings);
+        LOGGER.info(cll.toString());
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
@@ -84,7 +90,7 @@ public class GymApp {
 
             SimpleFormatter formatter = new SimpleFormatter();
             fileHandler.setFormatter(formatter);
-            logger.severe("Exception occurred: " + exception.getMessage());
+            logger.info("Exception occurred: " + exception.getMessage());
         }
         catch (IOException e) {
             LOGGER.info(e.toString());
