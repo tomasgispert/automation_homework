@@ -1,15 +1,16 @@
-package main.java.com.solvd.automation_homework;
+package com.solvd.automation_homework;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Date;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class GymApp {
     private static final int gymAppVersion;
     private static final Logger LOGGER;
+
 
     static {
         gymAppVersion = 2;

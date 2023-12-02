@@ -1,4 +1,4 @@
-package main.java.com.solvd.automation_homework;
+package com.solvd.automation_homework;
 
 public class Equipment {
     private int equipmentId;
