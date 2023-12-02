@@ -1,9 +1,10 @@
 package com.solvd.automation_homework;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -45,19 +46,19 @@ public class GymApp {
         Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting",100);
 
 
-        /*try{
+        try{
             mikePowerSession = member.completeSession(powerliftingWorkout,11);
         } catch (InvalidIntensityException e) {
             logExceptionToFile(e);
         }
 
-        try (FileWriter fw = new FileWriter("src/week2/logs/payments.log",true)){
-            fw.write(member.makePayment(90,"cash").toString()+System.getProperty("line.separator"));
+        try (FileWriter fw = new FileWriter("src/main/java/com/solvd/automation_homework/logs/payments.log",true)){
+            fw.write(member.makePayment(100,"cash").toString()+System.getProperty("line.separator"));
         } catch (InsufficientMoneyException e){
             logExceptionToFile(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }**/
+        }
 
         /*CustomLinkedList<Muscle> cll = new CustomLinkedList<>();
         cll.add(quadriceps);
@@ -94,7 +95,7 @@ public class GymApp {
     public static void logExceptionToFile(Exception exception) {
         Logger logger = Logger.getLogger("ExceptionLogger");
 
-        try (CustomFileHandler fileHandler = new CustomFileHandler("src/week2/logs/exceptions.log", true)) {
+        try (CustomFileHandler fileHandler = new CustomFileHandler("src/main/java/com/solvd/automation_homework/logs/exceptions.log", true)) {
             logger.addHandler(fileHandler.getFileHandler());
 
             SimpleFormatter formatter = new SimpleFormatter();

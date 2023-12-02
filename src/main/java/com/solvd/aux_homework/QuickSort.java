@@ -1,4 +1,4 @@
-package main.java.com.solvd.sorting_algorithm_homework;
+package com.solvd.aux_homework;
 
 import java.util.Arrays;
 import java.util.Random;
