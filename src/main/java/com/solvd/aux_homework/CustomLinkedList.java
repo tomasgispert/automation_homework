@@ -1,4 +1,4 @@
-package com.solvd.automation_homework;
+package com.solvd.aux_homework;
 
 
 public class CustomLinkedList<T> {

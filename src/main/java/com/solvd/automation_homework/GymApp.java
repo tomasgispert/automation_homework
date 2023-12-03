@@ -60,19 +60,6 @@ public class GymApp {
             throw new RuntimeException(e);
         }
 
-        /*CustomLinkedList<Muscle> cll = new CustomLinkedList<>();
-        cll.add(quadriceps);
-        cll.add(hamstrings);
-        LOGGER.info(cll.toString());**/
-
-        CustomLinkedList<String> cll = new CustomLinkedList<>();
-        cll.add("X");
-        cll.add("Y");
-        cll.add("Z");
-        cll.addFirst("B");
-        cll.addFirst("A");
-        LOGGER.info(cll.toString());
-
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
