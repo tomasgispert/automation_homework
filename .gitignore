@@ -31,3 +31,4 @@ bin/
 target
 src/main/java/com/solvd/automation_homework/logs
 /.idea/uiDesigner.xml
+/src/main/resources/output.txt
