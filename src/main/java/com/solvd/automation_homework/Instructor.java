@@ -59,8 +59,8 @@ public class Instructor extends Person implements Certifiable{
     }
 
     @Override
-    public Payment makePayment(double amount, String paymentMethod) {
-        return new Payment(new Date(),0,this,"instructor");
+    public Payment makePayment(double amount, String month,String paymentMethod) {
+        return new Payment(new Date(),month,0,this,"instructor");
     }
 
     public Exercise createExercise(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired) throws MissingEquipmentException {

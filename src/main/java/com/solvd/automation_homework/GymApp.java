@@ -1,5 +1,7 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.Month;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ public class GymApp {
         Instructor instructor = new Instructor(1,"John",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);
         Membership standardMembership = new Membership("Standard",100,10,true,"Cash only");
         Member member = new Member(1,"Mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
-        Payment mikeOctober = new Payment(new Date(1673462400000L),100,member,"cash");
+        Payment mikeOctober = new Payment(new Date(1673462400000L), Month.DECEMBER.getDisplayName(),100,member,"cash");
         Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
         Session mikePowerSession = new Session(new Date(1673462400000L),member,powerliftingWorkout);
 
@@ -53,7 +55,7 @@ public class GymApp {
         }
 
         try (FileWriter fw = new FileWriter("src/main/java/com/solvd/automation_homework/logs/payments.log",true)){
-            fw.write(member.makePayment(100,"cash").toString()+System.getProperty("line.separator"));
+            fw.write(member.makePayment(100,Month.DECEMBER.getDisplayName(), "cash").toString()+System.getProperty("line.separator"));
         } catch (InsufficientMoneyException e){
             logExceptionToFile(e);
         } catch (IOException e) {

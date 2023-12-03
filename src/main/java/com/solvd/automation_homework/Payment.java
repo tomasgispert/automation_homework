@@ -7,9 +7,11 @@ public class Payment {
     private double amount;
     private Person payer;
     private String paymentMethod;
+    private String month;
 
-    public Payment(Date date, double amount, Person payer, String paymentMethod) {
+    public Payment(Date date, String month, double amount, Person payer, String paymentMethod) {
         this.date = date;
+        this.month = month;
         this.amount = amount;
         this.payer = payer;
         this.paymentMethod = paymentMethod;
@@ -47,13 +49,22 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
     @Override
     public String toString() {
         return "Payment{" +
-                ", date=" + date +
+                "date=" + date +
                 ", amount=" + amount +
-                ", member=" + payer +
+                ", payer=" + payer +
                 ", paymentMethod='" + paymentMethod + '\'' +
+                ", month='" + month + '\'' +
                 '}';
     }
 }
