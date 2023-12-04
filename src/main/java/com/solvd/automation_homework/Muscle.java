@@ -1,16 +1,16 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.MusclePrimaryFunction;
+
 public final class Muscle {
     private int muscleId;
     private final String name;
-    private String description;
-    private String primaryFunction;
+    private MusclePrimaryFunction primaryFunction;
     private boolean isMajorMuscle;
 
-    public Muscle(int muscleId, String name, String description, String primaryFunction, boolean isMajorMuscle) {
+    public Muscle(int muscleId, String name, MusclePrimaryFunction primaryFunction, boolean isMajorMuscle) {
         this.muscleId = muscleId;
         this.name = name;
-        this.description = description;
         this.primaryFunction = primaryFunction;
         this.isMajorMuscle = isMajorMuscle;
     }
@@ -27,19 +27,11 @@ public final class Muscle {
         return name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPrimaryFunction() {
+    public MusclePrimaryFunction getPrimaryFunction() {
         return primaryFunction;
     }
 
-    public void setPrimaryFunction(String primaryFunction) {
+    public void setPrimaryFunction(MusclePrimaryFunction primaryFunction) {
         this.primaryFunction = primaryFunction;
     }
 
@@ -56,8 +48,7 @@ public final class Muscle {
         return "Muscle{" +
                 "muscleId=" + muscleId +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", primaryFunction='" + primaryFunction + '\'' +
+                ", primaryFunction='" + primaryFunction.getFunctionDescription() + '\'' +
                 ", isMajorMuscle=" + isMajorMuscle +
                 '}';
     }

@@ -1,6 +1,7 @@
 package com.solvd.automation_homework;
 
 import com.solvd.enums.Month;
+import com.solvd.enums.MusclePrimaryFunction;
 import com.solvd.enums.PaymentMethod;
 import com.solvd.enums.RPE;
 
@@ -25,8 +26,7 @@ public class GymApp {
 
     public static void main(String[] args){
         Equipment squatBar = new Equipment(1,"Squat Bar","Generic","Bar",25,"Steel");
-        Muscle quadriceps = new Muscle(1,"Quadriceps","Group of four muscles in the front of the thigh responsible for knee extension and lower limb stability","Knee extension",true);
-        Muscle hamstrings = new Muscle(1,"Hamstrings","Group of four muscles in the back of the thigh responsible for knee flexion and lower limb stability","Knee flexion",true);
+        Muscle quadriceps = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
 
         ArrayList<Muscle> squatMuscles = new ArrayList<>();
         squatMuscles.add(quadriceps);

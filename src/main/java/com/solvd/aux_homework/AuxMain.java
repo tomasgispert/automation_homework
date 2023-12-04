@@ -1,6 +1,7 @@
 package com.solvd.aux_homework;
 
 import com.solvd.automation_homework.Muscle;
+import com.solvd.enums.MusclePrimaryFunction;
 
 import java.util.logging.Logger;
 
@@ -9,8 +10,8 @@ public class AuxMain {
     public static void main(String[] args) {
 
         final Logger LOGGER = Logger.getLogger("AuxMain.class");
-        Muscle quadriceps = new Muscle(1,"Quadriceps","Group of four muscles in the front of the thigh responsible for knee extension and lower limb stability","Knee extension",true);
-        Muscle hamstrings = new Muscle(1,"Hamstrings","Group of four muscles in the back of the thigh responsible for knee flexion and lower limb stability","Knee flexion",true);
+        Muscle quadriceps = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
+        Muscle hamstrings = new Muscle(1,"Hamstrings", MusclePrimaryFunction.FLEXOR,true);
 
 
         CustomLinkedList<Muscle> cll = new CustomLinkedList<>();
