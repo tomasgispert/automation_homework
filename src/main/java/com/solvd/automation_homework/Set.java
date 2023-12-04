@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Set extends Exercise implements IVolume{
     private int reps;
     private double weight;
-    private int rpe;
+    private double rpe;
 
-    public Set(String name, String description, ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired, int reps, double weight, int rpe) {
+    public Set(String name, String description, ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired, int reps, double weight, double rpe) {
         super(name, description, musclesWorked, equipmentRequired);
         this.reps = reps;
         this.weight = weight;
@@ -30,7 +30,7 @@ public class Set extends Exercise implements IVolume{
         this.weight = weight;
     }
 
-    public int getRpe() {
+    public double getRpe() {
         return rpe;
     }
 

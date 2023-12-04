@@ -2,6 +2,7 @@ package com.solvd.automation_homework;
 
 import com.solvd.enums.Month;
 import com.solvd.enums.PaymentMethod;
+import com.solvd.enums.RPE;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,6 +49,12 @@ public class GymApp {
         powerliftingSeminarAttendees.add(member);
         Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting",100);
 
+
+        try{
+            mikePowerSession = member.completeSession(powerliftingWorkout, RPE.RPE_10.getValue());
+        } catch (InvalidIntensityException e) {
+            logExceptionToFile(e);
+        }
 
         try{
             mikePowerSession = member.completeSession(powerliftingWorkout,11);

@@ -59,7 +59,7 @@ public class Member extends Person implements IWorkout{
     }
 
     @Override
-    public Session completeSession(Workout workout, int rpe) throws InvalidIntensityException {
+    public Session completeSession(Workout workout, double rpe) throws InvalidIntensityException {
         if(rpe > 0 && rpe <= 10){
             Session completedSession = new Session(new Date(),this,workout);
             completedSession.setSessionRPE(rpe);
