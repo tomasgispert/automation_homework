@@ -1,5 +1,7 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.PaymentMethod;
+
 import java.util.List;
 import java.util.Date;
 
@@ -59,8 +61,8 @@ public class Instructor extends Person implements Certifiable{
     }
 
     @Override
-    public Payment makePayment(double amount, String month,String paymentMethod) {
-        return new Payment(new Date(),month,0,this,"instructor");
+    public Payment makePayment(double amount, String month,PaymentMethod method) {
+        return new Payment(new Date(),month,0,this, PaymentMethod.STAFF.getMethod());
     }
 
     public Exercise createExercise(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired) throws MissingEquipmentException {

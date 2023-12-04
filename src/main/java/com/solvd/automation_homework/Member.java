@@ -1,5 +1,7 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.PaymentMethod;
+
 import java.util.Date;
 
 public class Member extends Person implements IWorkout{
@@ -47,9 +49,9 @@ public class Member extends Person implements IWorkout{
     }
 
     @Override
-    public Payment makePayment(double amount, String month, String paymentMethod) throws InsufficientMoneyException {
-        if(amount >= this.getMembership().getCost()){
-            return new Payment(new Date(),month,amount,this,paymentMethod);
+    public Payment makePayment(double amount, String month, PaymentMethod method) throws InsufficientMoneyException {
+        if(amount >= this.getMembership().getCost(method)){
+            return new Payment(new Date(),month,amount,this,method.getMethod());
         }else{
             throw new InsufficientMoneyException("The amount is not enough to cover the Membership");
         }

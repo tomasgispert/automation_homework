@@ -1,5 +1,7 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.PaymentMethod;
+
 public class Membership implements Payable {
     private String type;
     private double fee;
@@ -67,7 +69,7 @@ public class Membership implements Payable {
     }
 
     @Override
-    public double getCost() {
-        return this.getFee();
+    public double getCost(PaymentMethod method) {
+        return this.getFee()*method.getModifier();
     }
 }

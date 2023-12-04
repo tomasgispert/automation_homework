@@ -1,5 +1,7 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.PaymentMethod;
+
 import java.util.List;
 import java.util.Date;
 
@@ -112,7 +114,7 @@ public class Seminar implements Certifiable,Payable{
     }
 
     @Override
-    public double getCost() {
-        return this.getPrice();
+    public double getCost(PaymentMethod method){
+        return this.getPrice()*method.getModifier();
     }
 }

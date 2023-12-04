@@ -1,6 +1,7 @@
 package com.solvd.automation_homework;
 
 import com.solvd.enums.Month;
+import com.solvd.enums.PaymentMethod;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class GymApp {
         }
 
         try (FileWriter fw = new FileWriter("src/main/java/com/solvd/automation_homework/logs/payments.log",true)){
-            fw.write(member.makePayment(100,Month.DECEMBER.getDisplayName(), "cash").toString()+System.getProperty("line.separator"));
+            fw.write(member.makePayment(100,Month.DECEMBER.getDisplayName(), PaymentMethod.CASH).toString()+System.getProperty("line.separator"));
         } catch (InsufficientMoneyException e){
             logExceptionToFile(e);
         } catch (IOException e) {

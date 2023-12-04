@@ -1,5 +1,7 @@
 package com.solvd.automation_homework;
 
+import com.solvd.enums.PaymentMethod;
+
 public interface IPay {
-    Payment makePayment(double amount,String month,String paymentMethod) throws InsufficientMoneyException;
+    Payment makePayment(double amount, String month, PaymentMethod method) throws InsufficientMoneyException;
 }
