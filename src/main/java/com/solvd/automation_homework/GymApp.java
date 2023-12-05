@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.*;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -27,6 +28,7 @@ public class GymApp {
     public static void main(String[] args){
         Equipment squatBar = new Equipment(1,"Squat Bar","Generic","Bar",25,"Steel");
         Muscle quadriceps = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
+        Muscle biceps = new Muscle(1,"Biceps", MusclePrimaryFunction.FLEXOR,false);
 
         ArrayList<Muscle> squatMuscles = new ArrayList<>();
         squatMuscles.add(quadriceps);
@@ -56,19 +58,42 @@ public class GymApp {
             logExceptionToFile(e);
         }
 
-        try{
+        /*try{
             mikePowerSession = member.completeSession(powerliftingWorkout,11);
         } catch (InvalidIntensityException e) {
             logExceptionToFile(e);
-        }
+        }**/
 
         try (FileWriter fw = new FileWriter("src/main/java/com/solvd/automation_homework/logs/payments.log",true)){
-            fw.write(member.makePayment(100,Month.DECEMBER.getDisplayName(), PaymentMethod.CASH).toString()+System.getProperty("line.separator"));
+            fw.write(member.makePayment(80,Month.DECEMBER.getDisplayName(), PaymentMethod.CASH).toString()+System.getProperty("line.separator"));
         } catch (InsufficientMoneyException e){
             logExceptionToFile(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+
+        WorkoutSet firstSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),10,100,7);
+        WorkoutSet secondSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),8,120,8);
+        WorkoutSet thirdSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),6,140,10);
+
+        Predicate<List<Muscle>> hasMajor = (muscles) -> {
+            boolean major = false;
+            for (Muscle m : muscles) if(!major) major = m.isMajorMuscle();
+            return major;
+        };
+        LOGGER.info(String.valueOf(hasMajor.test(firstSet.getMusclesWorked())));
+
+        Function<WorkoutSet,Double> calculateStressIndex = s ->
+                s.getVolume() * s.getRpe() / 10.0 / 1000.0;
+        LOGGER.info(String.valueOf(calculateStressIndex.apply(secondSet)));
+
+        Consumer<Seminar> sendReminder = seminar -> {
+            seminar.getAttendees().forEach( person -> {
+                LOGGER.info("Send reminder to: "+person.getContactInfo());
+            });
+        };
+        sendReminder.accept(powerliftingSeminar);
 
     }
 
@@ -103,6 +128,5 @@ public class GymApp {
             LOGGER.info(e.toString());
         }
     }
-
 
 }

@@ -62,9 +62,9 @@ public class Session implements IVolume {
         double volume = 0;
         List<Exercise> sets = this.getWorkout().getExercises();
         for (int i = 0; i < sets.size()-1; i++) {
-            if(sets.get(i) instanceof Set) {
-                Set set = (Set) sets.get(i);
-                volume = set.getVolume() + volume;
+            if(sets.get(i) instanceof WorkoutSet) {
+                WorkoutSet workoutSet = (WorkoutSet) sets.get(i);
+                volume = workoutSet.getVolume() + volume;
             }
         }
         return volume;

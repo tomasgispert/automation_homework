@@ -1,13 +1,13 @@
 package com.solvd.automation_homework;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Set extends Exercise implements IVolume{
+public class WorkoutSet extends Exercise implements IVolume{
     private int reps;
     private double weight;
     private double rpe;
 
-    public Set(String name, String description, ArrayList<Muscle> musclesWorked, ArrayList<Equipment> equipmentRequired, int reps, double weight, double rpe) {
+    public WorkoutSet(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired, int reps, double weight, double rpe) {
         super(name, description, musclesWorked, equipmentRequired);
         this.reps = reps;
         this.weight = weight;
