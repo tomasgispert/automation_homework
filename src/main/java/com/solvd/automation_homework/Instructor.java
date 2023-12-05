@@ -56,8 +56,10 @@ public class Instructor extends Person implements Certifiable{
     @Override
     public void introduceMyself() {
         System.out.println("Hi, my name is "+this.getName()
-                +" and I'm an Instructor and this are my favourite exercise is the "
-                +this.getTopThreeExercises().get(0).getName());
+                +", I'm an Instructor and this are my top 3 favourite exercises: "
+                +this.getTopThreeExercises().get(0).getName()+", "
+                +this.getTopThreeExercises().get(1).getName()+" and "
+                +this.getTopThreeExercises().get(2).getName());
     }
 
     @Override

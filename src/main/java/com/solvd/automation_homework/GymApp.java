@@ -10,7 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.function.*;
+import java.util.Random;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -26,29 +30,46 @@ public class GymApp {
     }
 
     public static void main(String[] args){
-        Equipment squatBar = new Equipment(1,"Squat Bar","Generic","Bar",25,"Steel");
-        Muscle quadriceps = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
-        Muscle biceps = new Muscle(1,"Biceps", MusclePrimaryFunction.FLEXOR,false);
+        Equipment powerBar = new Equipment(1,"Powerlifting Bar","Generic","Bar",20,"Steel");
+        Muscle quads = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
+        Muscle pecs = new Muscle(2,"Pectorals", MusclePrimaryFunction.ADDUCTOR,true);
+        Muscle traps = new Muscle(3,"Trapezius",MusclePrimaryFunction.STABILIZER,true);
+        Muscle hams = new Muscle(4,"Hamstrings",MusclePrimaryFunction.FLEXOR,true);
+        Muscle triceps = new Muscle(5,"Triceps",MusclePrimaryFunction.EXTENSOR,false);
+        Muscle glutes = new Muscle(6,"Gluteus",MusclePrimaryFunction.EXTENSOR,true);
 
         ArrayList<Muscle> squatMuscles = new ArrayList<>();
-        squatMuscles.add(quadriceps);
-        ArrayList<Equipment> squatEquipment = new ArrayList<>();
-        squatEquipment.add(squatBar);
+        squatMuscles.add(quads);
+        squatMuscles.add(hams);
+        squatMuscles.add(glutes);
+        ArrayList<Muscle> benchMuscles = new ArrayList<>();
+        benchMuscles.add(pecs);
+        benchMuscles.add(triceps);
+        ArrayList<Muscle> deadliftMuscles = new ArrayList<>();
+        deadliftMuscles.add(traps);
+        deadliftMuscles.add(hams);
+        deadliftMuscles.add(glutes);
+        ArrayList<Equipment> powerEquipment = new ArrayList<>();
+        powerEquipment.add(powerBar);
 
-        Exercise squat = new Exercise("Squat","Strength exercise in which the trainee lowers their hips from a standing position and then stands back up",squatMuscles,squatEquipment);
+        Exercise squat = new Exercise("Squat","Strength exercise in which the trainee lowers their hips from a standing position and then stands back up",squatMuscles,powerEquipment);
+        Exercise bench = new Exercise("Bench Press","Strength exercise in which the trainee lays down on a bench and lowers the bar down to chest level and then press it upwards while extending his arms",benchMuscles,powerEquipment);
+        Exercise deadlift = new Exercise("Deadlift","Strength exercise in which the trainee lifts the bar from a resting position on the floor to an upright position",deadliftMuscles,powerEquipment);
 
         List<Exercise> powerlifting101 = new ArrayList<>();
         powerlifting101.add(squat);
+        powerlifting101.add(bench);
+        powerlifting101.add(deadlift);
 
         Instructor instructor = new Instructor(1,"John",new Date(1678882400000L),"john@gmail.com","powerlifting",true,powerlifting101);
         Membership standardMembership = new Membership("Standard",100,10,true,"Cash only");
         Member member = new Member(1,"Mike",new Date(1673462400000L),"mike@gmail.com","General Health",standardMembership);
-        Payment mikeOctober = new Payment(new Date(1673462400000L), Month.DECEMBER.getDisplayName(),100,member,"cash");
-        Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"Squat only");
+        Workout powerliftingWorkout = new Workout(1,"Powerlifting 101",powerlifting101,4,instructor,"SBD");
         Session mikePowerSession = new Session(new Date(1673462400000L),member,powerliftingWorkout);
 
         ArrayList<Person> powerliftingSeminarAttendees = new ArrayList<>();
         powerliftingSeminarAttendees.add(member);
+        powerliftingSeminarAttendees.add(instructor);
         Seminar powerliftingSeminar = new Seminar(1,"Powerlifting 101",new Date(1687132800000L),120,instructor,powerliftingSeminarAttendees,"Introductory class to powerlifting",100);
 
 
@@ -74,8 +95,7 @@ public class GymApp {
 
 
         WorkoutSet firstSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),10,100,7);
-        WorkoutSet secondSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),8,120,8);
-        WorkoutSet thirdSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),6,140,10);
+        WorkoutSet secondSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),6,140,10);
 
         Predicate<List<Muscle>> hasMajor = (muscles) -> {
             boolean major = false;
@@ -94,6 +114,16 @@ public class GymApp {
             });
         };
         sendReminder.accept(powerliftingSeminar);
+
+        Supplier<Exercise> randomExercise = () -> {
+            Random random = new Random();
+            int randomIndex = random.nextInt(powerlifting101.size());
+            return powerlifting101.get(randomIndex);
+        };
+        LOGGER.info(randomExercise.get().getName());
+
+        Runnable seminarAttendeesSayHi = () -> powerliftingSeminarAttendees.forEach(Person::introduceMyself);
+        seminarAttendeesSayHi.run();
 
     }
 
