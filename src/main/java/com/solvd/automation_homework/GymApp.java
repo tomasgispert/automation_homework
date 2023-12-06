@@ -31,6 +31,9 @@ public class GymApp {
 
     public static void main(String[] args){
         Equipment powerBar = new Equipment(1,"Powerlifting Bar","Generic","Bar",20,"Steel");
+        Equipment ezBar = new Equipment(1,"EZ Curl Bar","Generic","Bar",10,"Steel");
+        Equipment hackSquat = new Equipment(1,"Hack Squat Machine","Generic","Machine",40,"Steel");
+
         Muscle quads = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
         Muscle pecs = new Muscle(2,"Pectorals", MusclePrimaryFunction.ADDUCTOR,true);
         Muscle traps = new Muscle(3,"Trapezius",MusclePrimaryFunction.STABILIZER,true);
@@ -51,6 +54,7 @@ public class GymApp {
         deadliftMuscles.add(glutes);
         ArrayList<Equipment> powerEquipment = new ArrayList<>();
         powerEquipment.add(powerBar);
+        powerBar.setAvailable(false);
 
         Exercise squat = new Exercise("Squat","Strength exercise in which the trainee lowers their hips from a standing position and then stands back up",squatMuscles,powerEquipment);
         Exercise bench = new Exercise("Bench Press","Strength exercise in which the trainee lays down on a bench and lowers the bar down to chest level and then press it upwards while extending his arms",benchMuscles,powerEquipment);
@@ -93,19 +97,20 @@ public class GymApp {
             throw new RuntimeException(e);
         }
 
-
         WorkoutSet firstSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),10,100,7);
         WorkoutSet secondSet = new WorkoutSet(squat.getName(), squat.getDescription(), squat.getMusclesWorked(),squat.getEquipmentRequired(),6,140,10);
-
         Predicate<List<Muscle>> hasMajor = (muscles) -> {
             boolean major = false;
-            for (Muscle m : muscles) if(!major) major = m.isMajorMuscle();
+            for (Muscle m : muscles)
+                if(!major)
+                    major = m.isMajorMuscle();
             return major;
         };
         LOGGER.info(String.valueOf(hasMajor.test(firstSet.getMusclesWorked())));
 
         Function<WorkoutSet,Double> calculateStressIndex = s ->
-                s.getVolume() * s.getRpe() / 10.0 / 1000.0;
+                s.getVolume() * s.getRpe() / 1000;
+        LOGGER.info(String.valueOf(calculateStressIndex.apply(firstSet)));
         LOGGER.info(String.valueOf(calculateStressIndex.apply(secondSet)));
 
         Consumer<Seminar> sendReminder = seminar -> {
@@ -122,8 +127,42 @@ public class GymApp {
         };
         LOGGER.info(randomExercise.get().getName());
 
-        Runnable seminarAttendeesSayHi = () -> powerliftingSeminarAttendees.forEach(Person::introduceMyself);
+        Runnable seminarAttendeesSayHi = () ->
+                powerliftingSeminarAttendees.forEach(Person::introduceMyself);
         seminarAttendeesSayHi.run();
+
+        List<Equipment> gymEquipment = new ArrayList<>();
+        gymEquipment.add(powerBar);
+        gymEquipment.add(ezBar);
+        gymEquipment.add(hackSquat);
+        findAvailable(gymEquipment,Equipment::isAvailable)
+                .forEach(equipment -> LOGGER.info(equipment.getName()));
+        List<Instructor> auxList = new ArrayList<>();
+        auxList.add(instructor);
+        findAvailable(auxList,Instructor::isCertified)
+                .forEach(ins -> LOGGER.info(ins.getName()));
+
+
+        Rateable<Exercise> exerciseAssessment = exercise -> {
+            if(hasMajor.test(exercise.getMusclesWorked()))
+                return 7;
+            else
+                return 5;
+        };
+        LOGGER.info(String.valueOf(exerciseAssessment.rate(squat)));
+        Rateable<WorkoutSet> setAssessment = workSet -> {
+            double baseRating = exerciseAssessment.rate(workSet);
+            if(workSet.getRpe()<=7)
+                return baseRating;
+            else
+                return baseRating+2;
+        };
+        LOGGER.info(String.valueOf(setAssessment.rate(secondSet)));
+
+        IPickWinner<Person> contest = contestants -> {
+            return contestants.get(new Random().nextInt(contestants.size()));
+        };
+        LOGGER.info(contest.pickWinner(powerliftingSeminarAttendees).getName());
 
     }
 
@@ -158,5 +197,16 @@ public class GymApp {
             LOGGER.info(e.toString());
         }
     }
+
+    public static <T> List<T> findAvailable(List<T> inputList, Predicate<T> predicate) {
+        List<T> outputList = new ArrayList<>();
+        for (T element : inputList) {
+            if (predicate.test(element)) {
+                outputList.add(element);
+            }
+        }
+        return outputList;
+    }
+
 
 }

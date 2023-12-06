@@ -16,6 +16,7 @@ public class Equipment {
         this.type = type;
         this.weight = weight;
         this.color = color;
+        this.isAvailable = true;
     }
 
     public int getEquipmentId() {
