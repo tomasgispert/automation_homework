@@ -1,7 +1,6 @@
 package com.solvd.automation_homework;
 
 import java.util.Date;
-import java.util.List;
 
 public class Session implements IVolume {
     private Date date;
@@ -59,14 +58,9 @@ public class Session implements IVolume {
 
     @Override
     public double getVolume() {
-        double volume = 0;
-        List<Exercise> sets = this.getWorkout().getExercises();
-        for (int i = 0; i < sets.size()-1; i++) {
-            if(sets.get(i) instanceof WorkoutSet) {
-                WorkoutSet workoutSet = (WorkoutSet) sets.get(i);
-                volume = workoutSet.getVolume() + volume;
-            }
-        }
-        return volume;
+        return this.getWorkout().getExercises().stream()
+                .filter(exercise -> exercise instanceof WorkoutSet)
+                .mapToDouble(exercise
+                        -> ((WorkoutSet) exercise).getVolume()).sum();
     }
 }

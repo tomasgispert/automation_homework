@@ -31,8 +31,8 @@ public class GymApp {
 
     public static void main(String[] args){
         Equipment powerBar = new Equipment(1,"Powerlifting Bar","Generic","Bar",20,"Steel");
-        Equipment ezBar = new Equipment(1,"EZ Curl Bar","Generic","Bar",10,"Steel");
-        Equipment hackSquat = new Equipment(1,"Hack Squat Machine","Generic","Machine",40,"Steel");
+        Equipment ezBar = new Equipment(2,"EZ Curl Bar","Generic","Bar",10,"Steel");
+        Equipment hackSquat = new Equipment(3,"Hack Squat Machine","Generic","Machine",40,"Steel");
 
         Muscle quads = new Muscle(1,"Quadriceps",MusclePrimaryFunction.EXTENSOR,true);
         Muscle pecs = new Muscle(2,"Pectorals", MusclePrimaryFunction.ADDUCTOR,true);
@@ -106,12 +106,15 @@ public class GymApp {
                     major = m.isMajorMuscle();
             return major;
         };
-        LOGGER.info(String.valueOf(hasMajor.test(firstSet.getMusclesWorked())));
+        LOGGER.info("Are major muscle groups involved in the "
+                +firstSet.getName()+"? "
+                +hasMajor.test(firstSet.getMusclesWorked()));
 
         Function<WorkoutSet,Double> calculateStressIndex = s ->
                 s.getVolume() * s.getRpe() / 1000;
-        LOGGER.info(String.valueOf(calculateStressIndex.apply(firstSet)));
-        LOGGER.info(String.valueOf(calculateStressIndex.apply(secondSet)));
+        LOGGER.info("Stress index of "
+                +secondSet.getName()+": "
+                +calculateStressIndex.apply(secondSet));
 
         Consumer<Seminar> sendReminder = seminar -> {
             seminar.getAttendees().forEach( person -> {
@@ -125,7 +128,8 @@ public class GymApp {
             int randomIndex = random.nextInt(powerlifting101.size());
             return powerlifting101.get(randomIndex);
         };
-        LOGGER.info(randomExercise.get().getName());
+        LOGGER.info("Get random exercise: "
+                +randomExercise.get().getName());
 
         Runnable seminarAttendeesSayHi = () ->
                 powerliftingSeminarAttendees.forEach(Person::introduceMyself);
@@ -136,11 +140,13 @@ public class GymApp {
         gymEquipment.add(ezBar);
         gymEquipment.add(hackSquat);
         findAvailable(gymEquipment,Equipment::isAvailable)
-                .forEach(equipment -> LOGGER.info(equipment.getName()));
+                .forEach(equipment ->
+                        LOGGER.info("Available: "+equipment.getName()));
         List<Instructor> auxList = new ArrayList<>();
         auxList.add(instructor);
         findAvailable(auxList,Instructor::isCertified)
-                .forEach(ins -> LOGGER.info(ins.getName()));
+                .forEach(ins ->
+                        LOGGER.info("Certified: "+ins.getName()));
 
 
         Rateable<Exercise> exerciseAssessment = exercise -> {
@@ -149,7 +155,8 @@ public class GymApp {
             else
                 return 5;
         };
-        LOGGER.info(String.valueOf(exerciseAssessment.rate(squat)));
+        LOGGER.info("Rating of the exercise: "
+                +exerciseAssessment.rate(squat));
         Rateable<WorkoutSet> setAssessment = workSet -> {
             double baseRating = exerciseAssessment.rate(workSet);
             if(workSet.getRpe()<=7)
@@ -157,12 +164,34 @@ public class GymApp {
             else
                 return baseRating+2;
         };
-        LOGGER.info(String.valueOf(setAssessment.rate(secondSet)));
+        LOGGER.info("Rating of the set: "
+                +setAssessment.rate(secondSet));
 
-        IPickWinner<Person> contest = contestants -> {
-            return contestants.get(new Random().nextInt(contestants.size()));
-        };
-        LOGGER.info(contest.pickWinner(powerliftingSeminarAttendees).getName());
+        IPickWinner<Person> contest = contestants ->
+                contestants.get(new Random().nextInt(contestants.size()));
+        LOGGER.info("And the winner is: "
+                +contest.pickWinner(powerliftingSeminarAttendees).getName()
+                +"!");
+
+
+        List<Exercise> auxWorkoutSets = new ArrayList<>();
+        auxWorkoutSets.add(firstSet);
+        auxWorkoutSets.add(secondSet);
+        mikePowerSession.getWorkout().setExercises(auxWorkoutSets);
+        LOGGER.info("Volume calculated with aggregates: "
+                +firstSet.getVolume()+" + "
+                +secondSet.getVolume()+" = "
+                +mikePowerSession.getVolume());
+
+        double average = auxWorkoutSets.stream()
+                .filter(WorkoutSet.class::isInstance)
+                .map(WorkoutSet.class::cast)
+                .mapToDouble(WorkoutSet::getVolume)
+                .average()
+                .getAsDouble();
+        LOGGER.info("Volume average is: "+average);
+
+
 
     }
 
