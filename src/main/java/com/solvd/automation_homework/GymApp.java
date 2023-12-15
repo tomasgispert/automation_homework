@@ -7,6 +7,7 @@ import com.solvd.enums.RPE;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -223,6 +224,36 @@ public class GymApp {
                 .forEach(instr ->
                         LOGGER.info("Certified instructor assisting the seminar: "
                         +instr.getName()));
+
+        String eqClassName = "com.solvd.automation_homework.Equipment";
+        try {
+            Class refClass = Class.forName(eqClassName);
+            Field[] declaredFields = refClass.getDeclaredFields();
+            Arrays.stream(declaredFields)
+                    .forEach(field ->
+                            LOGGER.info("Field: "
+                                    +Modifier.toString(field.getModifiers())
+                                    +" "+field.getType().getName()
+                                    +" "+field.getName()));
+            Constructor[] constructors = refClass.getConstructors();
+            Arrays.stream(constructors)
+                    .forEach(constructor ->
+                            LOGGER.info("Constructor: "
+                                    +Modifier.toString(constructor.getModifiers())
+                                    +" "+Arrays.toString(constructor.getParameters())));
+            Method[] methods = refClass.getDeclaredMethods();
+            Arrays.stream(methods).forEach(method ->
+                    LOGGER.info(Modifier.toString(method.getModifiers())
+                            +" "+method.getReturnType()
+                            +" "+method.getName()
+                            +" "+Arrays.toString(method.getParameters())));
+            Equipment refEq = (Equipment) constructors[0].newInstance(99,"Magic Machine","Generic","Machine",999,"Blue");
+            LOGGER.info("Created with reflection: "
+                    +refEq.getName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
