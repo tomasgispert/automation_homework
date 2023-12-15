@@ -7,10 +7,7 @@ import com.solvd.enums.RPE;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -39,7 +36,8 @@ public class GymApp {
         Muscle traps = new Muscle(3,"Trapezius",MusclePrimaryFunction.STABILIZER,true);
         Muscle hams = new Muscle(4,"Hamstrings",MusclePrimaryFunction.FLEXOR,true);
         Muscle triceps = new Muscle(5,"Triceps",MusclePrimaryFunction.EXTENSOR,false);
-        Muscle glutes = new Muscle(6,"Gluteus",MusclePrimaryFunction.EXTENSOR,true);
+        Muscle biceps = new Muscle(6,"Biceps",MusclePrimaryFunction.FLEXOR,false);
+        Muscle glutes = new Muscle(7,"Gluteus",MusclePrimaryFunction.EXTENSOR,true);
 
         ArrayList<Muscle> squatMuscles = new ArrayList<>();
         squatMuscles.add(quads);
@@ -83,12 +81,6 @@ public class GymApp {
             logExceptionToFile(e);
         }
 
-        /*try{
-            mikePowerSession = member.completeSession(powerliftingWorkout,11);
-        } catch (InvalidIntensityException e) {
-            logExceptionToFile(e);
-        }**/
-
         try (FileWriter fw = new FileWriter("src/main/java/com/solvd/automation_homework/logs/payments.log",true)){
             fw.write(member.makePayment(80,Month.DECEMBER.getDisplayName(), PaymentMethod.CASH).toString()+System.getProperty("line.separator"));
         } catch (InsufficientMoneyException e){
@@ -116,11 +108,10 @@ public class GymApp {
                 +secondSet.getName()+": "
                 +calculateStressIndex.apply(secondSet));
 
-        Consumer<Seminar> sendReminder = seminar -> {
-            seminar.getAttendees().forEach( person -> {
-                LOGGER.info("Send reminder to: "+person.getContactInfo());
-            });
-        };
+        Consumer<Seminar> sendReminder = seminar ->
+            seminar.getAttendees().forEach(person ->
+                    LOGGER.info("Send reminder to: "
+                            +person.getContactInfo()));
         sendReminder.accept(powerliftingSeminar);
 
         Supplier<Exercise> randomExercise = () -> {
@@ -183,15 +174,23 @@ public class GymApp {
                 +secondSet.getVolume()+" = "
                 +mikePowerSession.getVolume());
 
-        double average = auxWorkoutSets.stream()
+        OptionalDouble average = auxWorkoutSets.stream()
                 .filter(WorkoutSet.class::isInstance)
                 .map(WorkoutSet.class::cast)
                 .mapToDouble(WorkoutSet::getVolume)
-                .average()
-                .getAsDouble();
-        LOGGER.info("Volume average is: "+average);
+                .average();
+        if(average.isPresent()) LOGGER.info("Volume average is: "+average.getAsDouble());
 
-
+        List<Muscle> bicepsCurlMuscles = new ArrayList<>();
+        bicepsCurlMuscles.add(biceps);
+        List<Equipment> bicepsCurlEquipment = new ArrayList<>();
+        bicepsCurlEquipment.add(ezBar);
+        try {
+            Exercise bicepsCurl = instructor.createExercise("Biceps Curl","Curl Description",bicepsCurlMuscles,bicepsCurlEquipment);
+            LOGGER.info("Exercise "+bicepsCurl.getName()+" created successfully.");
+        } catch (MissingEquipmentException e) {
+            logExceptionToFile(e);
+        }
 
     }
 

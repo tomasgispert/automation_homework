@@ -67,14 +67,23 @@ public class Instructor extends Person implements Certifiable{
         return new Payment(new Date(),month,0,this, PaymentMethod.STAFF.getMethod());
     }
 
+//    public Exercise createExercise(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired) throws MissingEquipmentException {
+//        boolean isAvailable = true;
+//        for (int i = 0; i < equipmentRequired.size()-1; i++) {
+//            isAvailable = equipmentRequired.get(i).isAvailable();
+//            if(!isAvailable){
+//                break;
+//            }
+//        }
+//        if(isAvailable){
+//            return new Exercise(name,description,musclesWorked,equipmentRequired);
+//        }else{
+//            throw new MissingEquipmentException("The equipment requirements cannot be met at the moment");
+//        }
+//    }
     public Exercise createExercise(String name, String description, List<Muscle> musclesWorked, List<Equipment> equipmentRequired) throws MissingEquipmentException {
-        boolean isAvailable = true;
-        for (int i = 0; i < equipmentRequired.size()-1; i++) {
-            isAvailable = equipmentRequired.get(i).isAvailable();
-            if(!isAvailable){
-                break;
-            }
-        }
+        boolean isAvailable = equipmentRequired.stream()
+                .allMatch(Equipment::isAvailable);
         if(isAvailable){
             return new Exercise(name,description,musclesWorked,equipmentRequired);
         }else{
