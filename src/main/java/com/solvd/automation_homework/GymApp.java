@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.stream.Collectors;
 
 public class GymApp {
     private static final int gymAppVersion;
@@ -185,13 +186,43 @@ public class GymApp {
         bicepsCurlMuscles.add(biceps);
         List<Equipment> bicepsCurlEquipment = new ArrayList<>();
         bicepsCurlEquipment.add(ezBar);
+        Exercise bicepsCurl = null;
         try {
-            Exercise bicepsCurl = instructor.createExercise("Biceps Curl","Curl Description",bicepsCurlMuscles,bicepsCurlEquipment);
+            bicepsCurl = instructor.createExercise("Biceps Curl","Curl Description",bicepsCurlMuscles,bicepsCurlEquipment);
             LOGGER.info("Exercise "+bicepsCurl.getName()+" created successfully.");
         } catch (MissingEquipmentException e) {
             logExceptionToFile(e);
         }
 
+        List<Equipment> availableEquipment = gymEquipment.stream()
+                .filter(Equipment::isAvailable)
+                .collect(Collectors.toList());
+        availableEquipment.forEach(equipment ->
+                LOGGER.info("Available: "+equipment.getName()));
+
+        powerlifting101.add(bicepsCurl);
+        mikePowerSession.getWorkout().setExercises(powerlifting101);
+        powerliftingWorkout.getExercises().stream()
+                .filter(exercise ->
+                    exercise.getMusclesWorked().stream()
+                            .anyMatch(Muscle::isMajorMuscle)
+                ).collect(Collectors.toList())
+                .forEach(e ->
+                LOGGER.info("Exercise with major muscle groups: "+e.getName()));
+
+        squatMuscles.stream().filter(muscle ->
+                muscle.getPrimaryFunction() == MusclePrimaryFunction.FLEXOR)
+                .collect(Collectors.toList())
+                .forEach(flexor ->
+                        LOGGER.info("Flexors in the Squat: "+flexor.getName()));
+
+        powerliftingSeminar.getAttendees().stream()
+                .filter(Instructor.class::isInstance)
+                .map(Instructor.class::cast)
+                .filter(Instructor::isCertified)
+                .forEach(instr ->
+                        LOGGER.info("Certified instructor assisting the seminar: "
+                        +instr.getName()));
     }
 
     public static void printSummary(Equipment eq, Exercise ex, Instructor in, Member me, Membership ms, Muscle mu, Payment pa, Seminar se, Session ss, Workout wo){
